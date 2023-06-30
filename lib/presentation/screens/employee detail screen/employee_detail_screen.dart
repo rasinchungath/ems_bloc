@@ -1,6 +1,7 @@
 import 'package:ems_bloc/presentation/screens/edit%20employee%20screen/edit_employee_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../domain/models/employee_model.dart';
 import '../../widgets/custom_appbar.dart';
 import '../../widgets/custom_back_button.dart';
 import '../../widgets/custom_text.dart';
@@ -11,10 +12,10 @@ import 'widgets/edit_button.dart';
 class EmployeeDetailsScreen extends StatelessWidget {
   EmployeeDetailsScreen({
     super.key,
-    //required this.employee,
+    required this.employee,
     required this.homeBloc,
   });
-  //final Employee employee;
+  final Employee employee;
   final HomeBloc homeBloc;
   final EmployeeDetailBloc employeeDetailBloc = EmployeeDetailBloc();
 
@@ -95,11 +96,10 @@ class EmployeeDetailsScreen extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Text(
-                        '12',
-                        //employee.id.toString(),
+                      Text(
+                        employee.id.toString(),
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           letterSpacing: 0.6,
                           color: Color(0XFFDFEAF0),
                           fontSize: 12,
@@ -109,11 +109,10 @@ class EmployeeDetailsScreen extends StatelessWidget {
                       const SizedBox(
                         height: 28,
                       ),
-                      const Text(
-                        'Rasin Chungath',
-                        //'${employee.empFirstName} ${employee.empLastName}',
+                      Text(
+                        '${employee.empFirstName} ${employee.empLastName}',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           letterSpacing: 0.6,
                           color: Color(0XFFDFEAF0),
                           fontSize: 16,
@@ -123,87 +122,64 @@ class EmployeeDetailsScreen extends StatelessWidget {
                       const SizedBox(
                         height: 12,
                       ),
-                      const CustomText(
-                        text: 'Male',
-                        // employee.empGender.name,
+                      CustomText(
+                        text: employee.empGender.name,
                       ),
                       const SizedBox(
                         height: 12,
                       ),
-                      const CustomText(
-                        text: '24-03-1995',
-                        // employee.empDateOfBirth,
+                      CustomText(
+                        text: employee.empDateOfBirth,
                       ),
                       const SizedBox(
                         height: 12,
                       ),
-                      const CustomText(
-                        text: '15-05-2023',
-                        //employee.empDateOfJoining,
+                      CustomText(
+                        text: employee.empDateOfJoining,
                       ),
                       const SizedBox(
                         height: 12,
                       ),
-                      const CustomText(
-                        text: '8157908762',
-                        //employee.empPhoneNumber,
+                      CustomText(
+                        text: employee.empPhoneNumber,
                       ),
                       const SizedBox(
                         height: 12,
                       ),
-                      const CustomText(
-                        text: 'rasincrazz@gmail.com',
-                        //text: employee.empEmailId,
+                      CustomText(
+                        text: employee.empEmailId,
                       ),
                       const SizedBox(
                         height: 28,
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          CustomText(text: 'Chungath house'
-                              //'${employee.empHomeAddrLine1},'
-                              ),
-                          CustomText(
-                            text: 'Perumparamba',
-                            //employee.empHomeAddrLine2
-                          ),
+                          CustomText(text: '${employee.empHomeAddrLine1},'),
+                          CustomText(text: employee.empHomeAddrLine2),
                         ],
                       ),
                       const SizedBox(
                         height: 5,
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          CustomText(
-                            text: 'Edappal',
-                            //'${employee.empHomeAddrStreet},'
-                          ),
-                          CustomText(
-                            text: 'Malappuram',
-                            //'${employee.empHomeAddrDistrict},'
-                          ),
-                          CustomText(
-                            text: 'Kerala',
-                            //employee.empHomeAddrState
-                          ),
+                          CustomText(text: '${employee.empHomeAddrStreet},'),
+                          CustomText(text: '${employee.empHomeAddrDistrict},'),
+                          CustomText(text: employee.empHomeAddrState),
                         ],
                       ),
                       const SizedBox(
                         height: 5,
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CustomText(
-                            text: 'India',
-                            //${employee.empHomeAddrCountry} ,
+                            text: employee.empHomeAddrCountry,
                           ),
-                          CustomText(
-                            text: 'Kerala',
-                            // employee.empHomeAddrPinCode
-                          ),
+                          CustomText(text: employee.empHomeAddrPinCode),
                         ],
                       ),
                       EditButton(
