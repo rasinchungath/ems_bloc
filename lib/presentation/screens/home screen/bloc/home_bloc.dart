@@ -21,9 +21,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       HomeInitialEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
     List<Employee> employees = await EmployeesRepo().getEmployeesDetails();
-    // Employee employee = await EmployeesRepo().getEmployeeDetails(149);
-    // print(employees[1].empFirstName);
-    // print(employee.empFirstName);
+
     emit(HomeLoadingSuccessState(employees: employees));
   }
 
@@ -48,7 +46,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           await SearchEmployee().searchEmployee(event.id, event.employee);
       emit(HomeSearchEmployeeState(
           employee: employee, employees: event.employee));
-    }else{
+    } else {
       emit(HomeSearchEmployeeUnavailableState());
       emit(HomeLoadingSuccessState(employees: event.employee));
     }

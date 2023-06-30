@@ -24,7 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    homebloc.add(HomeInitialEvent());
+    homebloc.add(
+      HomeInitialEvent(),
+    );
     super.initState();
   }
 
@@ -46,28 +48,37 @@ class _HomeScreenState extends State<HomeScreen> {
             listener: (context, state) {
               if (state is HomeNavigateToEmployeeDetailPageState) {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => EmployeeDetailsScreen(
-                              homeBloc: homebloc,
-                              employee: state.employee,
-                            )));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EmployeeDetailsScreen(
+                      homeBloc: homebloc,
+                      employee: state.employee,
+                    ),
+                  ),
+                );
               } else if (state is HomeAddEmployeeState) {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AddEmployeeDetailsScreen(
-                              homebloc: homebloc,
-                            )));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddEmployeeDetailsScreen(
+                      homebloc: homebloc,
+                    ),
+                  ),
+                );
               } else if (state is HomeSearchEmployeeUnavailableState) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Employee not available')));
+                  const SnackBar(
+                    content: Text('Employee not available'),
+                  ),
+                );
               }
             },
             builder: (context, state) {
               switch (state.runtimeType) {
                 case HomeLoadingState:
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
                 case HomeLoadingSuccessState:
                   final successState = state as HomeLoadingSuccessState;
                   return SingleChildScrollView(
