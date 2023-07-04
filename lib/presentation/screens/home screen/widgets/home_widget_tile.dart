@@ -20,11 +20,6 @@ class HomeWidgetTile extends StatelessWidget {
     required this.focusNode,
   });
 
-
-   
-
-
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -109,7 +104,7 @@ class HomeWidgetTile extends StatelessWidget {
             ],
           ),
         ),
-        listview, //employees details will list here
+        listview, //employee details will list here
       ],
     );
   }

@@ -7,4 +7,8 @@ class AddEmployeeInitial extends AddEmployeeState {}
 
 class PreviousPagePopState extends AddEmployeeState{}
 
-class SaveNewEmployeeDetailsState extends AddEmployeeState{}
+class SaveNewEmployeeDetailsState extends AddEmployeeState{
+  final Employee employee;
+  SaveNewEmployeeDetailsState({required this.employee});
+  
+}

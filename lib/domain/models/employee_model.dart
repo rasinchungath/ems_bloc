@@ -10,7 +10,7 @@ Employee employeeDetailFromJson(String str) =>
     Employee.fromJson(json.decode(str));
 
 class Employee {
-  int id;
+  int? id;
   String empFirstName;
   String empLastName;
   EmpGender empGender;
@@ -27,7 +27,7 @@ class Employee {
   String empHomeAddrPinCode;
 
   Employee({
-    required this.id,
+    this.id,
     required this.empFirstName,
     required this.empLastName,
     required this.empGender,

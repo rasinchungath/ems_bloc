@@ -1,10 +1,13 @@
 import 'package:ems_bloc/presentation/screens/add%20employee%20screen/bloc/add_employee_bloc.dart';
+import 'package:ems_bloc/presentation/screens/add%20employee%20screen/widgets/circle_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../domain/models/employee_model.dart';
 import '../../widgets/custom_appbar.dart';
 import '../../widgets/custom_back_button.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_textfield.dart';
+import '../../widgets/gender_selector.dart';
 import '../home screen/bloc/home_bloc.dart';
 import '../home screen/home_screen.dart';
 
@@ -18,7 +21,7 @@ class AddEmployeeDetailsScreen extends StatefulWidget {
 }
 
 class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
-  //EmpGender selectedGender = EmpGender.MALE;
+  EmpGender selectedGender = EmpGender.MALE;
 
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
@@ -36,24 +39,6 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
   TextEditingController pinController = TextEditingController();
 
   final AddEmployeeBloc addEmployeeBloc = AddEmployeeBloc();
-
-  // bool isEmailRegistered(String email, List<Employee> employeeList) {
-  //   for (Employee employee in employeeList) {
-  //     if (employee.empEmailId == email) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
-
-  // bool isMobRegistered(String phone, List<Employee> employeeList) {
-  //   for (Employee employee in employeeList) {
-  //     if (employee.empPhoneNumber == phone) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -88,10 +73,28 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                           addEmployeeBloc.add(PreviousPagePopEvent());
                         },
                       ),
-                      CustomButton(
+                      CustomSaveButton(
                         onPressed: () async {
-                          addEmployeeBloc.add(SaveNewEmployeeDetailsEvent());
-                          // await addEmployee();
+                          addEmployeeBloc.add(
+                            SaveNewEmployeeDetailsEvent(
+                              employee: Employee(
+                                empFirstName: firstNameController.text,
+                                empLastName: lastNameController.text,
+                                empGender: selectedGender,
+                                empDateOfBirth: dObController.text,
+                                empDateOfJoining: dOjController.text,
+                                empPhoneNumber: phoneController.text,
+                                empEmailId: emailController.text,
+                                empHomeAddrLine1: adLine1Controller.text,
+                                empHomeAddrLine2: adLine2Controller.text,
+                                empHomeAddrStreet: streetController.text,
+                                empHomeAddrDistrict: districtController.text,
+                                empHomeAddrState: stateController.text,
+                                empHomeAddrCountry: countryController.text,
+                                empHomeAddrPinCode: pinController.text,
+                              ),
+                            ),
+                          );
                         },
                       ),
                     ],
@@ -117,33 +120,8 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                       children: [
                         const SizedBox(
                           height: 20,
-                        ),
-                        Row(
-                          children: [
-                            CustomTextField(
-                              keyboardType: TextInputType.number,
-                              controller: empIDController,
-                              hintText: 'Employee ID',
-                            ),
-                            const SizedBox(
-                              width: 35,
-                            ),
-                            const CircleAvatar(
-                              radius: 60,
-                              backgroundColor: Color(0XFFDFEAF0),
-                              child: Text(
-                                'Add\nProfile\nPicture',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  letterSpacing: 0.6,
-                                  color: Color(0xFF929495),
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                        ), 
+                        const CircleProfileAvatar(),
                         const SizedBox(
                           height: 5,
                         ),
@@ -160,39 +138,14 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                                 hintText: 'Last name'),
                           ],
                         ),
-                        // GenderSelector(
-                        //   dropDown: DropdownButton<EmpGender>(
-                        //     hint: const Text(
-                        //       'Gender',
-                        //       style: kcustomFieldStyle,
-                        //     ),
-                        //     value: selectedGender,
-                        //     onChanged: (newValue) {
-                        //       setState(() {
-                        //         selectedGender = newValue!;
-                        //       });
-                        //     },
-                        //     underline: Container(color: Colors.transparent),
-                        //     isExpanded: true,
-                        //     icon: Padding(
-                        //       padding: const EdgeInsets.only(right: 10),
-                        //       child: Image.asset(
-                        //         'assets/images/Dropdown Icon.png',
-                        //         height: 18,
-                        //         width: 18,
-                        //       ),
-                        //     ),
-                        //     items: EmpGender.values.map((gender) {
-                        //       return DropdownMenuItem<EmpGender>(
-                        //         value: gender,
-                        //         child: Text(
-                        //           gender.name,
-                        //           style: kcustomFieldStyle,
-                        //         ),
-                        //       );
-                        //     }).toList(),
-                        //   ),
-                        // ),
+                        GenderSelector(
+                          empGender: selectedGender,
+                          onChanged: (newValue) {
+                            setState(() {
+                              selectedGender = newValue!;
+                            });
+                          },
+                        ),
                         CustomTextField(
                           keyboardType: TextInputType.datetime,
                           controller: dObController,
@@ -269,11 +222,30 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                             const SizedBox(
                               width: 35,
                             ),
-                            CustomButton(
+                            CustomSaveButton(
                               onPressed: () async {
-                                addEmployeeBloc
-                                    .add(SaveNewEmployeeDetailsEvent());
-                                // await addEmployee();
+                                addEmployeeBloc.add(
+                                  SaveNewEmployeeDetailsEvent(
+                                    employee: Employee(
+                                      empFirstName: firstNameController.text,
+                                      empLastName: lastNameController.text,
+                                      empGender: selectedGender,
+                                      empDateOfBirth: dObController.text,
+                                      empDateOfJoining: dOjController.text,
+                                      empPhoneNumber: phoneController.text,
+                                      empEmailId: emailController.text,
+                                      empHomeAddrLine1: adLine1Controller.text,
+                                      empHomeAddrLine2: adLine2Controller.text,
+                                      empHomeAddrStreet: streetController.text,
+                                      empHomeAddrDistrict:
+                                          districtController.text,
+                                      empHomeAddrState: stateController.text,
+                                      empHomeAddrCountry:
+                                          countryController.text,
+                                      empHomeAddrPinCode: pinController.text,
+                                    ),
+                                  ),
+                                );
                               },
                             ),
                           ],
@@ -289,53 +261,4 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
       ),
     );
   }
-
-  // addEmployee() async {
-  //   if (firstNameController.text.isNotEmpty &&
-  //       lastNameController.text.isNotEmpty &&
-  //       emailController.text.isNotEmpty &&
-  //       phoneController.text.isNotEmpty) {
-  //     bool email =
-  //         isEmailRegistered(emailController.text, controller.employeeList);
-  //     bool phone =
-  //         isMobRegistered(phoneController.text, controller.employeeList);
-  //     if (email == false && phone == false) {
-  //       var employee = Employee(
-  //         empFirstName: firstNameController.text,
-  //         empLastName: lastNameController.text,
-  //         empGender: selectedGender,
-  //         empDateOfBirth: dObController.text,
-  //         empDateOfJoining: dOjController.text,
-  //         empPhoneNumber: phoneController.text,
-  //         empEmailId: emailController.text,
-  //         empHomeAddrLine1: adLine1Controller.text,
-  //         empHomeAddrLine2: adLine2Controller.text,
-  //         empHomeAddrStreet: streetController.text,
-  //         empHomeAddrDistrict: districtController.text,
-  //         empHomeAddrState: stateController.text,
-  //         empHomeAddrCountry: countryController.text,
-  //         empHomeAddrPinCode: pinController.text,
-  //       );
-  //       await controller.addEmployee(employee: employee);
-
-  //       Get.offAll(HomeScreen());
-  //     } else {
-  //       Get.snackbar(
-  //         'Email or phone is already Registered',
-  //         'please fill with another email or phone',
-  //         snackPosition: SnackPosition.BOTTOM,
-  //         backgroundColor: const Color(0XFF556080),
-  //         colorText: const Color(0XFFE6FAFC),
-  //       );
-  //     }
-  //   } else {
-  //     Get.snackbar(
-  //       'Some fields are missing',
-  //       'Please try to fill mandatory details',
-  //       snackPosition: SnackPosition.BOTTOM,
-  //       backgroundColor: const Color(0XFF556080),
-  //       colorText: const Color(0XFFE6FAFC),
-  //     );
-  //   }
-  // }
 }

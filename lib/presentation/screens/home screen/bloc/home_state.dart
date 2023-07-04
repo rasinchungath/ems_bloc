@@ -20,11 +20,14 @@ class HomeNavigateToEmployeeDetailPageState extends HomeState {
 class HomeSearchEmployeeState extends HomeState {
   final List<Employee> employees;
   final Employee employee;
-  HomeSearchEmployeeState({required this.employee,required this.employees,});
+  HomeSearchEmployeeState({
+    required this.employee,
+    required this.employees,
+  });
 }
 
 class HomeAddEmployeeState extends HomeState {}
 
 class HomeErrorState extends HomeState {}
 
-class HomeSearchEmployeeUnavailableState extends HomeState{}
+class HomeSearchEmployeeUnavailableState extends HomeState {}

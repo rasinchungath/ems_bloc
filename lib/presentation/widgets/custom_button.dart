@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../core/colors/colors.dart';
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.onPressed});
+class CustomSaveButton extends StatelessWidget {
+  const  CustomSaveButton({super.key, required this.onPressed});
   final VoidCallback onPressed;
 
   @override

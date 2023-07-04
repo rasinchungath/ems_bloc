@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
               } else if (state is HomeSearchEmployeeUnavailableState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    content: Text('Employee not available'),
+                    content: Text('Employee id is not available'),
                   ),
                 );
               }

@@ -9,7 +9,6 @@ class EmployeesRepo {
   Future<List<Employee>> getEmployeesDetails() async {
     var url = Uri.parse(uri);
     var response = await client.get(url);
-
     try {
       if (response.statusCode == 200) {
         var json = response.body;
@@ -50,13 +49,7 @@ class EmployeesRepo {
 
     try {
       if (response.statusCode == 200) {
-        // Get.snackbar(
-        //   'Success',
-        //   'Employee details updated successfully',
-        //   snackPosition: SnackPosition.BOTTOM,
-        //   backgroundColor: const Color(0XFF556080),
-        //   colorText: const Color(0XFFE6FAFC),
-        // );
+        // show a snackbar which shows employee details updated successfully
       }
     } catch (e) {
       throw Exception('Failed to update employee');
@@ -64,6 +57,7 @@ class EmployeesRepo {
   }
 
   Future<void> addEmployee({required Employee employee}) async {
+    print('add employeee here');
     final url = Uri.parse(uri);
     final headers = <String, String>{
       'Content-Type': 'application/json',
@@ -74,16 +68,11 @@ class EmployeesRepo {
       headers: headers,
       body: body,
     );
+    print(response.statusCode);
 
     try {
       if (response.statusCode == 201) {
-        // Get.snackbar(
-        //   'Success',
-        //   'New Employee added successfully',
-        //   snackPosition: SnackPosition.BOTTOM,
-        //   backgroundColor: const Color(0XFF556080),
-        //   colorText: const Color(0XFFE6FAFC),
-        // );
+        // show a snackbar which shows new employee successfully
       }
     } catch (e) {
       throw Exception('Failed to update employee');

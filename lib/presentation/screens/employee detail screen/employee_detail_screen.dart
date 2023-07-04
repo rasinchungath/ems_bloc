@@ -32,11 +32,14 @@ class EmployeeDetailsScreen extends StatelessWidget {
               Navigator.pop(context);
             } else if (state is EditEmployeeDetailState) {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => EditEmployeeDetailsScreen(
-                            homeBloc: homeBloc,
-                          )));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditEmployeeDetailsScreen(
+                    homeBloc: homeBloc,
+                    employee: employee,
+                  ),
+                ),
+              );
             }
           },
           child: SingleChildScrollView(
