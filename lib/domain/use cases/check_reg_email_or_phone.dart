@@ -20,7 +20,8 @@ class RegEmailOrPhone {
     return false;
   }
 
-  addEmployee(Employee employee, List<Employee> employeeList) async {
+  Future<int> addEmployee(
+      Employee employee, List<Employee> employeeList) async {
     if (employee.empFirstName.isNotEmpty &&
         employee.empLastName.isNotEmpty &&
         employee.empEmailId.isNotEmpty &&
@@ -44,25 +45,10 @@ class RegEmailOrPhone {
           empHomeAddrCountry: employee.empHomeAddrCountry,
           empHomeAddrPinCode: employee.empHomeAddrPinCode,
         );
-       await EmployeesRepo().addEmployee(employee: newEmployee);
-        
-      } else {
-        // Get.snackbar(
-        //   'Email or phone is already Registered',
-        //   'please fill with another email or phone',
-        //   snackPosition: SnackPosition.BOTTOM,
-        //   backgroundColor: const Color(0XFF556080),
-        //   colorText: const Color(0XFFE6FAFC),
-        // );
+        int response = await EmployeesRepo().addEmployee(employee: newEmployee);
+        return response;
       }
-    } else {
-      // Get.snackbar(
-      //   'Some fields are missing',
-      //   'Please try to fill mandatory details',
-      //   snackPosition: SnackPosition.BOTTOM,
-      //   backgroundColor: const Color(0XFF556080),
-      //   colorText: const Color(0XFFE6FAFC),
-      // );
     }
+    return 0;
   }
 }

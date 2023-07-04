@@ -5,10 +5,12 @@ import '../bloc/home_bloc.dart';
 class ListTileWidget extends StatelessWidget {
   final HomeBloc homebloc;
   final Employee employee;
+  final VoidCallback onLongPressed;
   const ListTileWidget({
     super.key,
     required this.homebloc,
     required this.employee,
+    required this.onLongPressed,
   });
 
   @override
@@ -22,9 +24,7 @@ class ListTileWidget extends StatelessWidget {
           ),
         );
       },
-      onLongPress: () {
-        //delete the employee from list
-      },
+      onLongPress: onLongPressed,
       leading: Image.asset(
         'assets/images/Profile Picture 1.png',
         height: 32,

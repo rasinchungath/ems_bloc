@@ -13,8 +13,18 @@ class HomeEmployeeDetailPageNavigateEvent extends HomeEvent {
 class HomeAddEmployeeButtonClickedEvent extends HomeEvent {}
 
 class HomeSearchEmployeeButtonClickedEvent extends HomeEvent {
-final List<Employee> employee;
-final int id;
-HomeSearchEmployeeButtonClickedEvent({required this.employee, required this.id});
-  
+  final List<Employee> employee;
+  final int id;
+  HomeSearchEmployeeButtonClickedEvent(
+      {required this.employee, required this.id});
+}
+
+class HomeDeleteEmployeeButtonClickedEvent extends HomeEvent {
+  final int id;
+  HomeDeleteEmployeeButtonClickedEvent({required this.id});
+}
+
+class HomeDeleteEvent extends HomeEvent {
+  final int id;
+  HomeDeleteEvent({required this.id});
 }

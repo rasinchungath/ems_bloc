@@ -14,12 +14,12 @@ class EditEmployeeBloc extends Bloc<EditEmployeeEvent, EditEmployeeState> {
     on<EditEmployeeInitialEvent>(editEmployeeInitialEvent);
     on<BackToPreviousPageEvent>(backToPreviousPageEvent);
     on<SaveEditedEmployeeDetailsEvent>(saveEditedEmployeeDetailsEvent);
-    
   }
 
   FutureOr<void> editEmployeeInitialEvent(
       EditEmployeeInitialEvent event, Emitter<EditEmployeeState> emit) {
-    final EmployeeTextField employeeText = FillTextField().editEmployeeTextField(event.employee);
+    final EmployeeTextField employeeText =
+        FillTextField().editEmployeeTextField(event.employee);
     emit(EditEmployeeTextFieldInitialState(employeeText: employeeText));
   }
 
@@ -29,8 +29,18 @@ class EditEmployeeBloc extends Bloc<EditEmployeeEvent, EditEmployeeState> {
   }
 
   FutureOr<void> saveEditedEmployeeDetailsEvent(
-      SaveEditedEmployeeDetailsEvent event, Emitter<EditEmployeeState> emit) async {
-      await EmployeesRepo().updateDetails(id:event.employee.id, employee: event.employee);
-    emit(SaveEditedEmployeeDetailsState());
+      SaveEditedEmployeeDetailsEvent event,
+      Emitter<EditEmployeeState> emit) async {
+    int response = await EmployeesRepo()
+        .updateDetails(id: event.employee.id, employee: event.employee);
+    if (response == 200) {
+      emit(SaveEditedEmployeeDetailsState());
+      emit(SavedEditedEmployeeSuccessState());
+    } else {
+      emit(SavedEditedEmployeeFailedState());
+      final EmployeeTextField employeeText =
+          FillTextField().editEmployeeTextField(event.employee);
+      emit(EditEmployeeTextFieldInitialState(employeeText: employeeText));
+    }
   }
 }

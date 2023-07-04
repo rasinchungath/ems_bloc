@@ -11,6 +11,7 @@ class HomeWidgetTile extends StatelessWidget {
   final HomeBloc homebloc;
   final List<Employee> employees;
   final FocusNode focusNode;
+
   const HomeWidgetTile({
     super.key,
     required this.searchController,
@@ -91,12 +92,12 @@ class HomeWidgetTile extends StatelessWidget {
                   height: height * 0.05,
                   width: width * 0.1,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4.0),
+                    borderRadius: BorderRadius.circular(10.0),
                     color: const Color(0XFF556080),
                   ),
                   child: const Icon(
-                    Icons.add,
-                    size: 35,
+                    Icons.search,
+                    size: 20,
                     color: kBGcolor,
                   ),
                 ),

@@ -5,10 +5,12 @@ abstract class AddEmployeeState {}
 
 class AddEmployeeInitial extends AddEmployeeState {}
 
-class PreviousPagePopState extends AddEmployeeState{}
+class PreviousPagePopState extends AddEmployeeState {}
 
-class SaveNewEmployeeDetailsState extends AddEmployeeState{
-  final Employee employee;
-  SaveNewEmployeeDetailsState({required this.employee});
-  
-}
+class SavedNewEmployeeSuccessState extends AddEmployeeState {}
+
+class SaveNewEmployeeFailedState extends AddEmployeeState {}
+
+class SaveNewEmployeeEmailorPhoneErrorState extends AddEmployeeState {}
+
+class SaveNewEmployeeFieldMissingErrorState extends AddEmployeeState {}

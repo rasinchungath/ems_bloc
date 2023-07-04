@@ -8,12 +8,12 @@ import '../../widgets/custom_back_button.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_textfield.dart';
 import '../../widgets/gender_selector.dart';
-import '../home screen/bloc/home_bloc.dart';
 import '../home screen/home_screen.dart';
 
 class AddEmployeeDetailsScreen extends StatefulWidget {
-  const AddEmployeeDetailsScreen({super.key, required this.homebloc});
-  final HomeBloc homebloc;
+  const AddEmployeeDetailsScreen({
+    super.key,
+  });
 
   @override
   State<AddEmployeeDetailsScreen> createState() =>
@@ -50,13 +50,26 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
           bloc: addEmployeeBloc,
           listener: (context, state) {
             if (state is PreviousPagePopState) {
-              widget.homebloc.add(HomeInitialEvent());
-              Navigator.pop(context);
-            } else if (state is SaveNewEmployeeDetailsState) {
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const HomeScreen()),
                   (Route<dynamic> route) => false);
+            } else if (state is SavedNewEmployeeSuccessState) {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  (Route<dynamic> route) => false);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('New Employee details added successfully'),
+                ),
+              );
+            } else if (state is SaveNewEmployeeFailedState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Failed to add new Employee'),
+                ),
+              );
             }
           },
           child: SingleChildScrollView(
@@ -120,7 +133,7 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                       children: [
                         const SizedBox(
                           height: 20,
-                        ), 
+                        ),
                         const CircleProfileAvatar(),
                         const SizedBox(
                           height: 5,

@@ -15,6 +15,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeAddEmployeeButtonClickedEvent>(homeAddEmployeeButtonClickedEvent);
     on<HomeSearchEmployeeButtonClickedEvent>(
         homeSearchEmployeeButtonClickedEvent);
+    on<HomeDeleteEmployeeButtonClickedEvent>(
+        homeDeleteEmployeeButtonClickedEvent);
+    on<HomeDeleteEvent>(homeDeleteEvent);
   }
 
   FutureOr<void> homeInitialEvent(
@@ -48,6 +51,22 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else {
       emit(HomeSearchEmployeeUnavailableState());
       emit(HomeLoadingSuccessState(employees: event.employee));
+    }
+  }
+
+  FutureOr<void> homeDeleteEmployeeButtonClickedEvent(
+      HomeDeleteEmployeeButtonClickedEvent event,
+      Emitter<HomeState> emit) async {
+    emit(HomeDeleteButtonClickedState(id: event.id));
+  }
+
+  FutureOr<void> homeDeleteEvent(
+      HomeDeleteEvent event, Emitter<HomeState> emit) async {
+    final int response = await EmployeesRepo().deleteEmployee(id: event.id);
+    if (response == 204) {
+      emit(HomeDeleteEmployeeSuccessState());
+    }else{
+      emit(HomeDeleteEmployeeFailedState());
     }
   }
 }

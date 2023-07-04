@@ -5,7 +5,7 @@ import '../../../domain/models/employee_model.dart';
 import '../../widgets/custom_appbar.dart';
 import '../../widgets/custom_back_button.dart';
 import '../../widgets/custom_text.dart';
-import '../home screen/bloc/home_bloc.dart';
+import '../home screen/home_screen.dart';
 import 'bloc/employee_detail_bloc.dart';
 import 'widgets/edit_button.dart';
 
@@ -13,10 +13,10 @@ class EmployeeDetailsScreen extends StatelessWidget {
   EmployeeDetailsScreen({
     super.key,
     required this.employee,
-    required this.homeBloc,
+   
   });
   final Employee employee;
-  final HomeBloc homeBloc;
+ 
   final EmployeeDetailBloc employeeDetailBloc = EmployeeDetailBloc();
 
   @override
@@ -28,14 +28,16 @@ class EmployeeDetailsScreen extends StatelessWidget {
           bloc: employeeDetailBloc,
           listener: (context, state) {
             if (state is BackToHomeNavigateState) {
-              homeBloc.add(HomeInitialEvent());
-              Navigator.pop(context);
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  (Route<dynamic> route) => false);
             } else if (state is EditEmployeeDetailState) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => EditEmployeeDetailsScreen(
-                    homeBloc: homeBloc,
+                   
                     employee: employee,
                   ),
                 ),

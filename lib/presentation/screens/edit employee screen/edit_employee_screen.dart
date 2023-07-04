@@ -1,5 +1,4 @@
 import 'package:ems_bloc/domain/models/employee_model.dart';
-import 'package:ems_bloc/presentation/screens/employee%20detail%20screen/bloc/employee_detail_bloc.dart';
 import 'package:ems_bloc/presentation/screens/home%20screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,16 +7,14 @@ import '../../widgets/custom_back_button.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_textfield.dart';
 import '../../widgets/gender_selector.dart';
-import '../home screen/bloc/home_bloc.dart';
 import 'bloc/edit_employee_bloc.dart';
 
 class EditEmployeeDetailsScreen extends StatefulWidget {
   const EditEmployeeDetailsScreen({
     super.key,
-    required this.homeBloc,
     required this.employee,
   });
-  final HomeBloc homeBloc;
+
   final Employee employee;
 
   @override
@@ -43,15 +40,29 @@ class _EditEmployeeDetailsScreenState extends State<EditEmployeeDetailsScreen> {
         body: BlocConsumer<EditEmployeeBloc, EditEmployeeState>(
           bloc: editEmployeeBloc,
           listener: (context, state) {
-            if (state is EditEmployeeDetailState) {
-            } else if (state is BackToPreviousPageState) {
+            if (state is BackToPreviousPageState) {
               Navigator.pop(context);
             } else if (state is SaveEditedEmployeeDetailsState) {
-              widget.homeBloc.add(HomeInitialEvent());
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const HomeScreen()),
                   (Route<dynamic> route) => false);
+            } else if (state is SavedEditedEmployeeSuccessState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Employee detail updated successfully'),
+                ),
+              );
+            } else if (state is SavedEditedEmployeeFailedState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Failed to update Employee details'),
+                ),
+              );
+              // Navigator.pushAndRemoveUntil(
+              //     context,
+              //     MaterialPageRoute(builder: (context) => const HomeScreen()),
+              //     (Route<dynamic> route) => false);
             }
           },
           builder: (context, state) {

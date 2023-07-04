@@ -5,11 +5,9 @@ import '../../domain/models/employee_model.dart';
 class GenderSelector extends StatelessWidget {
   const GenderSelector({
     super.key,
-    //required this.dropDown,
     required this.empGender,
     required this.onChanged,
   });
-  //final Widget dropDown;
   final EmpGender empGender;
   final void Function(EmpGender?)? onChanged;
 

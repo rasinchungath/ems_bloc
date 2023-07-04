@@ -8,6 +8,9 @@ const kAppBarTextstyle = TextStyle(
   color: kBGcolor,
 );
 
+const String uri = 'http://15.207.222.215:8080/api/employees';
+
+
 const kSearchStyle = TextStyle(
   color: kSearchTextColor,
   fontSize: 12.0,
@@ -28,15 +31,4 @@ const kcustomFieldStyle = TextStyle(
   fontWeight: FontWeight.w300,
 );
 
-List<String> employeeName = [
-  'Rasin Chungath',
-  'Clint Jose',
-  'Thanoof Ayoob',
-  'Febin Thomas',
-  'Renjitha',
-  'Lijo George',
-  'Sreejith',
-  'Riji Justin',
-  'Prashanth',
-  'Tobby'
-];
+

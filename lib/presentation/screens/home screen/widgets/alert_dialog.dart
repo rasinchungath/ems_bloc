@@ -1,3 +1,4 @@
+import 'package:ems_bloc/presentation/screens/home%20screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/colors/colors.dart';
 
@@ -34,7 +35,12 @@ showAlertDialog(
             TextButton(
               child: const Text('NO'),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomeScreen(),
+                  ),
+                );
               },
             ),
           ],

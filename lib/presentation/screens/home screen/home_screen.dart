@@ -5,6 +5,7 @@ import '../../../core/colors/colors.dart';
 import '../add employee screen/add_employee_screen.dart';
 import '../employee detail screen/employee_detail_screen.dart';
 import 'bloc/home_bloc.dart';
+import 'widgets/alert_dialog.dart';
 import 'widgets/home_appbar.dart';
 import 'widgets/list_tile_widget.dart';
 
@@ -51,7 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => EmployeeDetailsScreen(
-                      homeBloc: homebloc,
                       employee: state.employee,
                     ),
                   ),
@@ -60,15 +60,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AddEmployeeDetailsScreen(
-                      homebloc: homebloc,
-                    ),
+                    builder: (context) => const AddEmployeeDetailsScreen(),
                   ),
                 );
               } else if (state is HomeSearchEmployeeUnavailableState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Employee id is not available'),
+                  ),
+                );
+              } else if (state is HomeDeleteButtonClickedState) {
+                showAlertDialog(
+                    context: context,
+                    onPressed: () {
+                      homebloc.add(HomeDeleteEvent(id: state.id));
+                      Navigator.of(context).pop();
+                    });
+              } else if (state is HomeDeleteEmployeeSuccessState) {
+                homebloc.add(HomeInitialEvent());
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Employee deleted successfully'),
+                  ),
+                );
+              } else if (state is HomeDeleteEmployeeFailedState) {
+                homebloc.add(HomeInitialEvent());
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Failed to delete employee details'),
                   ),
                 );
               }
@@ -97,6 +116,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: ListTileWidget(
                             homebloc: homebloc,
                             employee: successState.employees[index],
+                            onLongPressed: () {
+                              homebloc.add(HomeDeleteEmployeeButtonClickedEvent(
+                                  id: successState.employees[index].id!));
+                            },
                           ),
                         ),
                       ),
@@ -112,6 +135,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     listview: ListTileWidget(
                       homebloc: homebloc,
                       employee: searchState.employee,
+                      onLongPressed: () {
+                        homebloc.add(HomeDeleteEmployeeButtonClickedEvent(
+                            id: searchState.employee.id!));
+                      },
                     ),
                   );
 
@@ -134,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: height * 0.07,
                 width: width * 0.15,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4.0),
+                  borderRadius: BorderRadius.circular(15),
                   color: const Color(0XFF556080),
                 ),
                 child: const Icon(

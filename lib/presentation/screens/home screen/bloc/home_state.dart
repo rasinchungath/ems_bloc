@@ -31,3 +31,12 @@ class HomeAddEmployeeState extends HomeState {}
 class HomeErrorState extends HomeState {}
 
 class HomeSearchEmployeeUnavailableState extends HomeState {}
+
+class HomeDeleteEmployeeSuccessState extends HomeState {}
+
+class HomeDeleteEmployeeFailedState extends HomeState {}
+
+class HomeDeleteButtonClickedState extends HomeState{
+  final int id;
+  HomeDeleteButtonClickedState({required this.id});
+}
