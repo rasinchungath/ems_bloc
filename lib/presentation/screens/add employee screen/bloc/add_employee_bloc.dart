@@ -25,7 +25,7 @@ class AddEmployeeBloc extends Bloc<AddEmployeeEvent, AddEmployeeState> {
   ) async {
     List<Employee> employees = await EmployeesRepo().getEmployeesDetails();
     int response =
-        await RegEmailOrPhone().addEmployee(event.employee, employees);
+        await RegEmailOrPhone.addEmployee(event.employee, employees);
     if (response == 201) {
       emit(SavedNewEmployeeSuccessState());
     } else {

@@ -2,6 +2,7 @@ import 'package:ems_bloc/presentation/screens/edit%20employee%20screen/edit_empl
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/models/employee_model.dart';
+import '../../../domain/use cases/first_letter_capitalize.dart';
 import '../../widgets/custom_appbar.dart';
 import '../../widgets/custom_back_button.dart';
 import '../../widgets/custom_text.dart';
@@ -13,14 +14,15 @@ class EmployeeDetailsScreen extends StatelessWidget {
   EmployeeDetailsScreen({
     super.key,
     required this.employee,
-   
   });
   final Employee employee;
- 
+
   final EmployeeDetailBloc employeeDetailBloc = EmployeeDetailBloc();
 
   @override
   Widget build(BuildContext context) {
+    final empFirstName = ToUpperCase.toCapCase(text: employee.empFirstName);
+    final empLastName = ToUpperCase.toCapCase(text: employee.empLastName);
     return SafeArea(
       child: Scaffold(
         appBar: customAppbar(title: 'Employee details'),
@@ -37,7 +39,6 @@ class EmployeeDetailsScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => EditEmployeeDetailsScreen(
-                   
                     employee: employee,
                   ),
                 ),
@@ -115,7 +116,7 @@ class EmployeeDetailsScreen extends StatelessWidget {
                         height: 28,
                       ),
                       Text(
-                        '${employee.empFirstName} ${employee.empLastName}',
+                        '$empFirstName $empLastName',
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           letterSpacing: 0.6,
@@ -182,7 +183,7 @@ class EmployeeDetailsScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CustomText(
-                            text: employee.empHomeAddrCountry,
+                            text: '${employee.empHomeAddrCountry},',
                           ),
                           CustomText(text: employee.empHomeAddrPinCode),
                         ],

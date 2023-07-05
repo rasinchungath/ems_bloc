@@ -10,7 +10,7 @@ class CustomBackButton extends StatelessWidget {
     return RawMaterialButton(
       onPressed: onPressed,
       elevation: 0,
-      fillColor: const Color(0XFF556080),
+      fillColor: kBackButtonColor,
       padding: const EdgeInsets.all(0),
       shape: const CircleBorder(),
       child: const Icon(

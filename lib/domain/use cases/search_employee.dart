@@ -3,7 +3,7 @@ import '../models/employee_model.dart';
 
 class SearchEmployee {
   
-  bool isEmpAvailable(int id, List<Employee> employeeList) {
+  static bool isEmpAvailable(int id, List<Employee> employeeList) {
     for (Employee employee in employeeList) {
       if (employee.id == id) {
         return true;
@@ -12,7 +12,7 @@ class SearchEmployee {
     return false;
   }
 
-  Future<Employee> searchEmployee(int id, List<Employee> employeeList) async {
+  static Future<Employee> searchEmployee(int id, List<Employee> employeeList) async {
     var employee = await EmployeesRepo().getEmployeeDetails(id);
     return employee;
   }

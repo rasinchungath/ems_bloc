@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/constants/constant.dart';
 import '../../../../domain/models/employee_model.dart';
@@ -26,9 +27,26 @@ class HomeWidgetTile extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const SizedBox(height: 10,),
+        BlocBuilder<HomeBloc, HomeState>(
+          bloc: homebloc,
+          builder: (context, state) {
+            switch (state.runtimeType) {
+              case HomeSearchEmployeeState:
+                return IconButton(
+                  icon: const Icon(Icons.arrow_back, color: kBackButtonColor,size: 30,),
+                  onPressed: () {
+                  homebloc.add(HomeInitialEvent());
+                });
+              default:
+                return const SizedBox();
+            }
+          },
+        ),
         Padding(
-          padding: const EdgeInsets.all(23.0),
+          padding: const EdgeInsets.all(10.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -65,7 +83,7 @@ class HomeWidgetTile extends StatelessWidget {
                               right: 8,
                               bottom: 13,
                             ),
-                            hintText: 'Search',
+                            hintText: 'Search Employee',
                             hintStyle: kSearchStyle,
                             border: InputBorder.none,
                           ),

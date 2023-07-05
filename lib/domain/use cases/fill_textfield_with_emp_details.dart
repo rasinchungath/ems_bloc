@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/textfield_model.dart';
 
 class FillTextField {
+
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController empIDController = TextEditingController();

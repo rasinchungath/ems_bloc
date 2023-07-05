@@ -41,11 +41,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       HomeSearchEmployeeButtonClickedEvent event,
       Emitter<HomeState> emit) async {
     final bool isEmpAvailable =
-        SearchEmployee().isEmpAvailable(event.id, event.employee);
+        SearchEmployee.isEmpAvailable(event.id, event.employee);
     if (isEmpAvailable) {
       emit(HomeLoadingState());
       final Employee employee =
-          await SearchEmployee().searchEmployee(event.id, event.employee);
+          await SearchEmployee.searchEmployee(event.id, event.employee);
       emit(HomeSearchEmployeeState(
           employee: employee, employees: event.employee));
     } else {

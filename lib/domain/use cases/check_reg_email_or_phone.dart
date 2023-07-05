@@ -2,7 +2,7 @@ import '../../data/repositories/employees_repo.dart';
 import '../models/employee_model.dart';
 
 class RegEmailOrPhone {
-  bool isEmailRegistered(String email, List<Employee> employeeList) {
+  static bool isEmailRegistered(String email, List<Employee> employeeList) {
     for (Employee employee in employeeList) {
       if (employee.empEmailId == email) {
         return true;
@@ -11,7 +11,7 @@ class RegEmailOrPhone {
     return false;
   }
 
-  bool isMobRegistered(String phone, List<Employee> employeeList) {
+  static bool isMobRegistered(String phone, List<Employee> employeeList) {
     for (Employee employee in employeeList) {
       if (employee.empPhoneNumber == phone) {
         return true;
@@ -20,7 +20,7 @@ class RegEmailOrPhone {
     return false;
   }
 
-  Future<int> addEmployee(
+  static Future<int> addEmployee(
       Employee employee, List<Employee> employeeList) async {
     if (employee.empFirstName.isNotEmpty &&
         employee.empLastName.isNotEmpty &&

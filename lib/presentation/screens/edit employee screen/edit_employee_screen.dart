@@ -59,10 +59,6 @@ class _EditEmployeeDetailsScreenState extends State<EditEmployeeDetailsScreen> {
                   content: Text('Failed to update Employee details'),
                 ),
               );
-              // Navigator.pushAndRemoveUntil(
-              //     context,
-              //     MaterialPageRoute(builder: (context) => const HomeScreen()),
-              //     (Route<dynamic> route) => false);
             }
           },
           builder: (context, state) {
@@ -152,20 +148,15 @@ class _EditEmployeeDetailsScreenState extends State<EditEmployeeDetailsScreen> {
                                 height: 20,
                               ),
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  CustomTextField(
-                                    keyboardType: TextInputType.number,
-                                    controller: editEmployee
-                                        .employeeText.empIDController,
-                                    hintText: 'Employee ID',
-                                  ),
-                                  const SizedBox(
-                                    width: 35,
-                                  ),
                                   Image.asset(
                                     'assets/images/Profile Picture.png',
                                     height: 120,
                                     width: 120,
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
                                   ),
                                 ],
                               ),

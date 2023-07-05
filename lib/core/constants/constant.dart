@@ -10,11 +10,16 @@ const kAppBarTextstyle = TextStyle(
 
 const String uri = 'http://15.207.222.215:8080/api/employees';
 
-
 const kSearchStyle = TextStyle(
   color: kSearchTextColor,
   fontSize: 12.0,
   fontWeight: FontWeight.w400,
+);
+
+const homeTextStyle = TextStyle(
+  fontWeight: FontWeight.w500,
+  fontSize: 12,
+  color: Color(0XFF41485F),
 );
 
 const kEmployeeDetailStyle = TextStyle(
@@ -30,5 +35,3 @@ const kcustomFieldStyle = TextStyle(
   fontSize: 12.0,
   fontWeight: FontWeight.w300,
 );
-
-
