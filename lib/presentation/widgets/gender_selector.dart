@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../core/colors/colors.dart';
 import '../../core/constants/constant.dart';
 import '../../domain/models/employee_model.dart';
 
@@ -14,29 +16,29 @@ class GenderSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        top: 8,
-        bottom: 8,
+      padding:  EdgeInsets.only(
+        top: 8.r,
+        bottom: 8.r,
       ),
       child: Container(
-        height: 30,
-        width: 150,
+        height: 30.h,
+        width: 150.w,
         decoration: BoxDecoration(
           border: Border.all(
             color: const Color(0xFFFFFFFF),
-            width: 0.5,
+            width: 0.5.r,
           ),
           borderRadius: BorderRadius.circular(20),
           color: const Color(0XFFDFEAF0),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(
-            left: 18,
-            top: 5,
-            bottom: 3,
+          padding:  EdgeInsets.only(
+            left: 18.r,
+            top: 5.r,
+            bottom: 3.r,
           ),
           child: DropdownButton<EmpGender>(
-            hint: const Text(
+            hint:  Text(
               'Gender',
               style: kcustomFieldStyle,
             ),
@@ -45,11 +47,11 @@ class GenderSelector extends StatelessWidget {
             underline: Container(color: Colors.transparent),
             isExpanded: true,
             icon: Padding(
-              padding: const EdgeInsets.only(right: 10),
+              padding:  EdgeInsets.only(right: 10.r),
               child: Image.asset(
                 'assets/images/Dropdown Icon.png',
-                height: 18,
-                width: 18,
+                height: 18.h,
+                width: 18.w,
               ),
             ),
             items: EmpGender.values.map((gender) {
@@ -57,7 +59,12 @@ class GenderSelector extends StatelessWidget {
                 value: gender,
                 child: Text(
                   gender.name,
-                  style: kcustomFieldStyle,
+                  style: TextStyle(
+                letterSpacing: 0.6,
+                color: kCustomTextFieldTextColor,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w300,
+              ),
                 ),
               );
             }).toList(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomText extends StatelessWidget {
   const CustomText({super.key, required this.text});
@@ -9,10 +10,10 @@ class CustomText extends StatelessWidget {
     return Text(
       text,
       textAlign: TextAlign.center,
-      style: const TextStyle(
+      style:  TextStyle(
         letterSpacing: 0.6,
-        color: Color(0XFFDFEAF0),
-        fontSize: 14,
+        color: const Color(0XFFDFEAF0),
+        fontSize: 14.sp,
         fontWeight: FontWeight.w600,
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:ems_bloc/domain/models/employee_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/constants/constant.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../domain/use cases/first_letter_capitalize.dart';
 import '../bloc/home_bloc.dart';
 
@@ -21,7 +21,7 @@ class ListTileWidget extends StatelessWidget {
     final empFirstName = ToUpperCase.toCapCase(text: employee.empFirstName);
     final empLastName = ToUpperCase.toCapCase(text: employee.empLastName);
     return ListTile(
-      minLeadingWidth: 7,
+      minLeadingWidth: 7.r,
       onTap: () {
         homebloc.add(
           HomeEmployeeDetailPageNavigateEvent(
@@ -32,8 +32,8 @@ class ListTileWidget extends StatelessWidget {
       onLongPress: onLongPressed,
       leading: Image.asset(
         'assets/images/Profile Picture 1.png',
-        height: 32,
-        width: 32,
+        height: 32.h,
+        width: 32.w,
       ),
       title: BlocBuilder<HomeBloc, HomeState>(
         bloc: homebloc,
@@ -42,7 +42,11 @@ class ListTileWidget extends StatelessWidget {
             case HomeLoadingSuccessState:
               return Text(
                 empFirstName,
-                style: homeTextStyle,
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 12.sp,
+                  color: const Color(0XFF41485F),
+                ),
               );
             case HomeSearchEmployeeState:
               return Column(
@@ -50,11 +54,19 @@ class ListTileWidget extends StatelessWidget {
                 children: [
                   Text(
                     '$empFirstName $empLastName',
-                    style: homeTextStyle,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12.sp,
+                      color: const Color(0XFF41485F),
+                    ),
                   ),
                   Text(
                     'Sex: ${employee.empGender.name}   Emp Id: ${employee.id}',
-                    style: homeTextStyle,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12.sp,
+                      color: const Color(0XFF41485F),
+                    ),
                   ),
                 ],
               );

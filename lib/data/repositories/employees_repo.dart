@@ -5,7 +5,7 @@ import '../../domain/models/employee_model.dart';
 
 class EmployeesRepo {
   var client = http.Client();
-  
+
   Future<List<Employee>> getEmployeesDetails() async {
     var url = Uri.parse(uri);
     var response = await client.get(url);

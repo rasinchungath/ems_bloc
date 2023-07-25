@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../core/constants/constant.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../core/colors/colors.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -15,39 +16,49 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        top: 8,
-        bottom: 8,
+      padding: EdgeInsets.only(
+        top: 8.r,
+        bottom: 8.r,
       ),
       child: Container(
-        height: 30,
-        width: 150,
+        height: 30.h,
+        width: 150.w,
         decoration: BoxDecoration(
           border: Border.all(
             color: const Color(0xFFFFFFFF),
-            width: 0.5,
+            width: 0.5.r,
           ),
           borderRadius: BorderRadius.circular(20),
           color: const Color(0XFFDFEAF0),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(
-            left: 10,
+          padding: EdgeInsets.only(
+            left: 10.r,
           ),
           child: TextFormField(
             keyboardType: keyboardType,
             controller: controller,
             decoration: InputDecoration(
-              contentPadding: const EdgeInsets.only(
-                left: 8,
-                right: 8,
-                bottom: 13,
+              contentPadding: EdgeInsets.only(
+                left: 8.r,
+                right: 8.r,
+                bottom: 13.r,
               ),
               hintText: hintText,
-              hintStyle: kcustomFieldStyle,
+              hintStyle: TextStyle(
+                letterSpacing: 0.6,
+                color: kCustomTextFieldTextColor,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w300,
+              ),
               border: InputBorder.none,
             ),
-            style: kcustomFieldStyle,
+            style: TextStyle(
+              letterSpacing: 0.6,
+              color: kCustomTextFieldTextColor,
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w300,
+            ),
           ),
         ),
       ),

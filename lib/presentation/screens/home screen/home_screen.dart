@@ -1,6 +1,7 @@
 import 'package:ems_bloc/presentation/screens/home%20screen/widgets/home_widget_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/colors/colors.dart';
 import '../add employee screen/add_employee_screen.dart';
 import '../employee detail screen/employee_detail_screen.dart';
@@ -20,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController searchController = TextEditingController();
 
   final HomeBloc homebloc = HomeBloc();
-
   final FocusNode focusNode = FocusNode();
 
   @override
@@ -34,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
 
     return SafeArea(
       child: GestureDetector(
@@ -152,21 +151,21 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
           floatingActionButton: Padding(
-            padding: const EdgeInsets.only(right: 12, bottom: 18),
+            padding: EdgeInsets.only(right: 12.r, bottom: 18.r),
             child: InkWell(
               onTap: () {
                 homebloc.add(HomeAddEmployeeButtonClickedEvent());
               },
               child: Container(
-                height: height * 0.07,
-                width: width * 0.15,
+                height: 60.h,
+                width: 60.w,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: const Color(0XFF556080),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.add,
-                  size: 50,
+                  size: 50.sp,
                   color: kBGcolor,
                 ),
               ),

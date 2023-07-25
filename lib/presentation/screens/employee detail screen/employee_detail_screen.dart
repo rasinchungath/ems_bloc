@@ -1,6 +1,7 @@
 import 'package:ems_bloc/presentation/screens/edit%20employee%20screen/edit_employee_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../domain/models/employee_model.dart';
 import '../../../domain/use cases/first_letter_capitalize.dart';
 import '../../widgets/custom_appbar.dart';
@@ -24,34 +25,36 @@ class EmployeeDetailsScreen extends StatelessWidget {
     final empFirstName = ToUpperCase.toCapCase(text: employee.empFirstName);
     final empLastName = ToUpperCase.toCapCase(text: employee.empLastName);
     return SafeArea(
-      child: Scaffold(
-        appBar: customAppbar(title: 'Employee details'),
-        body: BlocListener<EmployeeDetailBloc, EmployeeDetailState>(
-          bloc: employeeDetailBloc,
-          listener: (context, state) {
-            if (state is BackToHomeNavigateState) {
-              Navigator.pushAndRemoveUntil(
+      child: WillPopScope(
+        onWillPop: () async {
+          employeeDetailBloc.add(BackToHomeNavigateEvent());
+          return true;
+        },
+        child: Scaffold(
+          appBar: customAppbar(title: 'Employee details'),
+          body: BlocListener<EmployeeDetailBloc, EmployeeDetailState>(
+            bloc: employeeDetailBloc,
+            listener: (context, state) {
+              if (state is BackToHomeNavigateState) {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomeScreen()),
+                    (Route<dynamic> route) => false);
+              } else if (state is EditEmployeeDetailState) {
+                Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  (Route<dynamic> route) => false);
-            } else if (state is EditEmployeeDetailState) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => EditEmployeeDetailsScreen(
-                    employee: employee,
+                  MaterialPageRoute(
+                    builder: (context) => EditEmployeeDetailsScreen(
+                      employee: employee,
+                    ),
                   ),
-                ),
-              );
-            }
-          },
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 0, right: 10, top: 16, bottom: 16),
-                  child: Row(
+                );
+              }
+            },
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomBackButton(
@@ -60,144 +63,146 @@ class EmployeeDetailsScreen extends StatelessWidget {
                         },
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                          bottom: 10,
-                          right: 12,
+                        padding: EdgeInsets.only(
+                          bottom: 10.r,
+                          right: 12.r,
                         ),
                         child: IconButton(
                           onPressed: () {
                             employeeDetailBloc
                                 .add(EditEmployeeDetailsButtonClickedEvent());
                           },
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.edit_square,
-                            color: Color(0XFF556080),
-                            size: 40,
+                            color: const Color(0XFF556080),
+                            size: 40.sp,
                           ),
                         ),
                       ),
                     ],
                   ),
-                ),
-                Container(
-                  height: 580,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        'assets/images/Blue Window.png',
+                  Container(
+                     height: 630.h,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(
+                          'assets/images/Blue Window.png',
+                        ),
+                        fit: BoxFit.fill,
                       ),
-                      fit: BoxFit.fill,
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Image.asset(
+                          'assets/images/Profile Picture.png',
+                          height: 113.h,
+                          width: 113.w,
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Text(
+                          employee.id.toString(),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            letterSpacing: 0.6.sp,
+                            color: const Color(0XFFDFEAF0),
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 28.h,
+                        ),
+                        Text(
+                          '$empFirstName $empLastName',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            letterSpacing: 0.6,
+                            color: const Color(0XFFDFEAF0),
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        CustomText(
+                          text: employee.empGender.name,
+                        ),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        CustomText(
+                          text: employee.empDateOfBirth,
+                        ),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        CustomText(
+                          text: employee.empDateOfJoining,
+                        ),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        CustomText(
+                          text: employee.empPhoneNumber,
+                        ),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        CustomText(
+                          text: employee.empEmailId,
+                        ),
+                        SizedBox(
+                          height: 28.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomText(text: '${employee.empHomeAddrLine1},'),
+                            CustomText(text: employee.empHomeAddrLine2),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomText(text: '${employee.empHomeAddrStreet},'),
+                            CustomText(
+                                text: '${employee.empHomeAddrDistrict},'),
+                            CustomText(text: employee.empHomeAddrState),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomText(
+                              text: '${employee.empHomeAddrCountry},',
+                            ),
+                            CustomText(text: employee.empHomeAddrPinCode),
+                          ],
+                        ),
+                        EditButton(
+                          onPressed: () {
+                            employeeDetailBloc
+                                .add(EditEmployeeDetailsButtonClickedEvent());
+                          },
+                        ),
+                        SizedBox(height: 25.h,),
+                      ],
                     ),
                   ),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Image.asset(
-                        'assets/images/Profile Picture.png',
-                        height: 113,
-                        width: 113,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        employee.id.toString(),
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          letterSpacing: 0.6,
-                          color: Color(0XFFDFEAF0),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 28,
-                      ),
-                      Text(
-                        '$empFirstName $empLastName',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          letterSpacing: 0.6,
-                          color: Color(0XFFDFEAF0),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      CustomText(
-                        text: employee.empGender.name,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      CustomText(
-                        text: employee.empDateOfBirth,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      CustomText(
-                        text: employee.empDateOfJoining,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      CustomText(
-                        text: employee.empPhoneNumber,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      CustomText(
-                        text: employee.empEmailId,
-                      ),
-                      const SizedBox(
-                        height: 28,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CustomText(text: '${employee.empHomeAddrLine1},'),
-                          CustomText(text: employee.empHomeAddrLine2),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CustomText(text: '${employee.empHomeAddrStreet},'),
-                          CustomText(text: '${employee.empHomeAddrDistrict},'),
-                          CustomText(text: employee.empHomeAddrState),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CustomText(
-                            text: '${employee.empHomeAddrCountry},',
-                          ),
-                          CustomText(text: employee.empHomeAddrPinCode),
-                        ],
-                      ),
-                      EditButton(
-                        onPressed: () {
-                          employeeDetailBloc
-                              .add(EditEmployeeDetailsButtonClickedEvent());
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

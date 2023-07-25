@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/colors/colors.dart';
-import '../../../../core/constants/constant.dart';
 import '../../../../domain/models/employee_model.dart';
 import '../bloc/home_bloc.dart';
 
@@ -24,70 +24,80 @@ class HomeWidgetTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 10,),
+        SizedBox(height: 10.h),
         BlocBuilder<HomeBloc, HomeState>(
           bloc: homebloc,
           builder: (context, state) {
             switch (state.runtimeType) {
               case HomeSearchEmployeeState:
                 return IconButton(
-                  icon: const Icon(Icons.arrow_back, color: kBackButtonColor,size: 30,),
-                  onPressed: () {
-                  homebloc.add(HomeInitialEvent());
-                });
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: kBackButtonColor,
+                      size: 30.sp,
+                    ),
+                    onPressed: () {
+                      homebloc.add(HomeInitialEvent());
+                    });
               default:
                 return const SizedBox();
             }
           },
         ),
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: EdgeInsets.all(10.r),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                height: height * 0.048,
-                width: width * .55,
+                height: 30.h,
+                width: 182.w,
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: const Color(0xFFC9C9CB),
-                    width: 0.5,
+                    width: 0.5.sp,
                   ),
                   borderRadius: BorderRadius.circular(20),
                   color: const Color(0XFFE7ECED),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 10,
+                  padding: EdgeInsets.only(
+                    left: 10.r,
                   ),
                   child: Row(
                     children: [
                       Image.asset(
                         'assets/images/Lens Icon.png',
-                        height: height * 0.05,
-                        width: width * 0.04,
+                        height: 13.h,
+                        width: 13.w,
                       ),
                       Flexible(
                         child: TextFormField(
                           focusNode: focusNode,
                           keyboardType: TextInputType.number,
                           controller: searchController,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             contentPadding: EdgeInsets.only(
-                              left: 8,
-                              right: 8,
-                              bottom: 13,
+                              left: 8.w,
+                              right: 8.w,
+                              bottom: 13.h,
                             ),
                             hintText: 'Search Employee',
-                            hintStyle: kSearchStyle,
+                            hintStyle: TextStyle(
+                              color: kSearchTextColor,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
                             border: InputBorder.none,
                           ),
-                          style: kSearchStyle,
+                          style: TextStyle(
+                            color: kSearchTextColor,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                     ],
@@ -107,15 +117,15 @@ class HomeWidgetTile extends StatelessWidget {
                   searchController.clear();
                 },
                 child: Container(
-                  height: height * 0.05,
-                  width: width * 0.1,
+                  height: 30.h,
+                  width: 30.w,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(10.r),
                     color: const Color(0XFF556080),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.search,
-                    size: 20,
+                    size: 18.sp,
                     color: kBGcolor,
                   ),
                 ),

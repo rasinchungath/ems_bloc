@@ -2,6 +2,7 @@ import 'package:ems_bloc/domain/models/employee_model.dart';
 import 'package:ems_bloc/presentation/screens/home%20screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../widgets/custom_appbar.dart';
 import '../../widgets/custom_back_button.dart';
 import '../../widgets/custom_button.dart';
@@ -24,6 +25,7 @@ class EditEmployeeDetailsScreen extends StatefulWidget {
 
 class _EditEmployeeDetailsScreenState extends State<EditEmployeeDetailsScreen> {
   final EditEmployeeBloc editEmployeeBloc = EditEmployeeBloc();
+
 
   @override
   void initState() {
@@ -68,66 +70,58 @@ class _EditEmployeeDetailsScreenState extends State<EditEmployeeDetailsScreen> {
                 return SingleChildScrollView(
                   child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 0,
-                          right: 20,
-                          top: 16,
-                          bottom: 16,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomBackButton(
-                              onPressed: () {
-                                editEmployeeBloc.add(BackToPreviousPageEvent());
-                              },
-                            ),
-                            CustomSaveButton(
-                              onPressed: () async {
-                                editEmployeeBloc.add(
-                                  SaveEditedEmployeeDetailsEvent(
-                                    employee: Employee(
-                                      id: int.parse(editEmployee
-                                          .employeeText.empIDController.text),
-                                      empFirstName: editEmployee.employeeText
-                                          .firstNameController.text,
-                                      empLastName: editEmployee
-                                          .employeeText.lastNameController.text,
-                                      empGender: editEmployee
-                                          .employeeText.selectedGender,
-                                      empDateOfBirth: editEmployee
-                                          .employeeText.dObController.text,
-                                      empDateOfJoining: editEmployee
-                                          .employeeText.dOjController.text,
-                                      empPhoneNumber: editEmployee
-                                          .employeeText.phoneController.text,
-                                      empEmailId: editEmployee
-                                          .employeeText.emailController.text,
-                                      empHomeAddrLine1: editEmployee
-                                          .employeeText.adLine1Controller.text,
-                                      empHomeAddrLine2: editEmployee
-                                          .employeeText.adLine2Controller.text,
-                                      empHomeAddrStreet: editEmployee
-                                          .employeeText.streetController.text,
-                                      empHomeAddrDistrict: editEmployee
-                                          .employeeText.districtController.text,
-                                      empHomeAddrState: editEmployee
-                                          .employeeText.stateController.text,
-                                      empHomeAddrCountry: editEmployee
-                                          .employeeText.countryController.text,
-                                      empHomeAddrPinCode: editEmployee
-                                          .employeeText.pinController.text,
-                                    ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomBackButton(
+                            onPressed: () {
+                              editEmployeeBloc.add(BackToPreviousPageEvent());
+                            },
+                          ),
+                          CustomSaveButton(
+                            onPressed: () async {
+                              editEmployeeBloc.add(
+                                SaveEditedEmployeeDetailsEvent(
+                                  employee: Employee(
+                                    id: int.parse(editEmployee
+                                        .employeeText.empIDController.text),
+                                    empFirstName: editEmployee.employeeText
+                                        .firstNameController.text,
+                                    empLastName: editEmployee
+                                        .employeeText.lastNameController.text,
+                                    empGender: editEmployee
+                                        .employeeText.selectedGender,
+                                    empDateOfBirth: editEmployee
+                                        .employeeText.dObController.text,
+                                    empDateOfJoining: editEmployee
+                                        .employeeText.dOjController.text,
+                                    empPhoneNumber: editEmployee
+                                        .employeeText.phoneController.text,
+                                    empEmailId: editEmployee
+                                        .employeeText.emailController.text,
+                                    empHomeAddrLine1: editEmployee
+                                        .employeeText.adLine1Controller.text,
+                                    empHomeAddrLine2: editEmployee
+                                        .employeeText.adLine2Controller.text,
+                                    empHomeAddrStreet: editEmployee
+                                        .employeeText.streetController.text,
+                                    empHomeAddrDistrict: editEmployee
+                                        .employeeText.districtController.text,
+                                    empHomeAddrState: editEmployee
+                                        .employeeText.stateController.text,
+                                    empHomeAddrCountry: editEmployee
+                                        .employeeText.countryController.text,
+                                    empHomeAddrPinCode: editEmployee
+                                        .employeeText.pinController.text,
                                   ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                       Container(
-                        height: 580,
+                         height: 630.h,
                         decoration: const BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(
@@ -137,31 +131,31 @@ class _EditEmployeeDetailsScreenState extends State<EditEmployeeDetailsScreen> {
                           ),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 20,
-                            right: 20,
+                          padding:  EdgeInsets.only(
+                            left: 20.r,
+                            right: 20.r,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const SizedBox(
-                                height: 20,
+                              SizedBox(
+                                height: 20.h,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Image.asset(
                                     'assets/images/Profile Picture.png',
-                                    height: 120,
-                                    width: 120,
+                                    height: 120.h,
+                                    width: 120.h,
                                   ),
-                                  const SizedBox(
-                                    width: 20,
+                                  SizedBox(
+                                    width: 20.w,
                                   ),
                                 ],
                               ),
-                              const SizedBox(
-                                height: 5,
+                              SizedBox(
+                                height: 5.h,
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -284,8 +278,8 @@ class _EditEmployeeDetailsScreenState extends State<EditEmployeeDetailsScreen> {
                                       controller: editEmployee
                                           .employeeText.pinController,
                                       hintText: 'Pin Code'),
-                                  const SizedBox(
-                                    width: 35,
+                                   SizedBox(
+                                    width: 35.w,
                                   ),
                                   CustomSaveButton(
                                     onPressed: () async {

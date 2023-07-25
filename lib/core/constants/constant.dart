@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../colors/colors.dart';
 
-const kAppBarTextstyle = TextStyle(
-  letterSpacing: 0.06,
+TextStyle kAppBarTextstyle = TextStyle(
+  letterSpacing: 0.6.sp,
   fontWeight: FontWeight.w700,
-  fontSize: 18,
+  fontSize: 20.sp,
   color: kBGcolor,
 );
 
@@ -29,9 +30,9 @@ const kEmployeeDetailStyle = TextStyle(
   fontWeight: FontWeight.w600,
 );
 
-const kcustomFieldStyle = TextStyle(
+TextStyle kcustomFieldStyle = TextStyle(
   letterSpacing: 0.6,
   color: kCustomTextFieldTextColor,
-  fontSize: 12.0,
+  fontSize: 12.sp,
   fontWeight: FontWeight.w300,
 );

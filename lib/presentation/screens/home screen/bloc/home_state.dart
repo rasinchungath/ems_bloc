@@ -26,7 +26,9 @@ class HomeSearchEmployeeState extends HomeState {
   });
 }
 
-class HomeAddEmployeeState extends HomeState {}
+class HomeAddEmployeeState extends HomeState {
+  
+}
 
 class HomeErrorState extends HomeState {}
 

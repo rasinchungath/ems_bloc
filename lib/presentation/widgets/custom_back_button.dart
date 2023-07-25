@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/colors/colors.dart';
 
 class CustomBackButton extends StatelessWidget {
@@ -13,10 +14,10 @@ class CustomBackButton extends StatelessWidget {
       fillColor: kBackButtonColor,
       padding: const EdgeInsets.all(0),
       shape: const CircleBorder(),
-      child: const Icon(
+      child:  Icon(
         Icons.arrow_back,
         color: kBGcolor,
-        size: 30.0,
+        size: 30.sp,
       ),
     );
   }

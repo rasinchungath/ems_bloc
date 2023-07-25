@@ -1,37 +1,53 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/constant.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/colors/colors.dart';
 
 AppBar homeAppbar = AppBar(
-  toolbarHeight: 140,
+  toolbarHeight: 124.h,
   flexibleSpace: Container(
-    height: 140,
+    height: 124.h,
     decoration: const BoxDecoration(
       image: DecorationImage(
         image: AssetImage('assets/images/Top Header.png'),
         fit: BoxFit.cover,
       ),
     ),
-    child: const Padding(
-      padding: EdgeInsets.only(top: 22, bottom: 22, right: 27),
+    child: Padding(
+      padding: EdgeInsets.only(top: 22.h, bottom: 22.h, right: 27.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Expanded(
             child: Text(
               'EMPLOYEE',
-              style: kAppBarTextstyle,
+              style: TextStyle(
+                letterSpacing: 0.6,
+                fontWeight: FontWeight.w700,
+                fontSize: 20.sp,
+                color: kBGcolor,
+              ),
             ),
           ),
           Expanded(
             child: Text(
               'MANAGEMENT',
-              style: kAppBarTextstyle,
+              style: TextStyle(
+                letterSpacing: 0.6,
+                fontWeight: FontWeight.w700,
+                fontSize: 20.sp,
+                color: kBGcolor,
+              ),
             ),
           ),
           Expanded(
             child: Text(
               'SYSTEM',
-              style: kAppBarTextstyle,
+              style: TextStyle(
+                letterSpacing: 0.6.sp,
+                fontWeight: FontWeight.w700,
+                fontSize: 20.sp,
+                color: kBGcolor,
+              ),
             ),
           ),
         ],
